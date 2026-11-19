@@ -1,0 +1,19 @@
+id = "patinete-no-mueras"
+name = "Patinete No Mueras"
+version = "0.1.0"
+requires_api = "0.2"
+description = "POV en monopatín eléctrico: semáforos, colectivos y motos."
+locales = ["es"]
+default_locale = "es"
+players = [1, 1]
+modes = ["partida"]
+
+[controller]
+layout = "motion"
+skin = "tokyo-night"
+action = "Mirar atrás"
+back = "Volver"
+hint = "Incliná para doblar · tirá atrás para frenar · A: mirar atrás"
+
+[art]
+motif = "auto"
