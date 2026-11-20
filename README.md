@@ -20,12 +20,14 @@ La consola lo lista en la biblioteca si el symlink existe en
 |---|---|---|
 | Doblar | incliná el teléfono a izquierda/derecha | arrastrá el dedo a los lados |
 | Frenar | tirá el teléfono hacia atrás | tocá la franja inferior del touchpad |
-| Mirar atrás | **mantené A** (hombro izquierdo) | **A** + toque en la mitad derecha |
-| Arrancar / reintentar | **A** | **A** |
+| Mirar atrás | **mantené ×** (hombro izquierdo) | **×** + toque en la mitad derecha |
+| Arrancar / reintentar | **×** | **×** |
 
 El monopatín acelera solo hasta 40 km/h. Toda la dificultad está en elegir
-cuándo frenar. Sin sensores el juego sigue siendo jugable: el arrastre dobla y
-la franja inferior frena. **B** queda para volver al launcher.
+cuándo frenar. Los sensores arrancan solos (en iOS, el primer toque concede el
+permiso). Sin sensores el juego sigue siendo jugable: el arrastre dobla y la
+franja inferior frena. **○** queda para volver al launcher. En teclado, × es
+**Enter** o **J**; el mouse reemplaza al dedo.
 
 El teléfono vibra y suena en choques, multas, bocinas y semáforos en verde. Si
 el dispositivo no soporta vibración/audio, el juego sigue igual.
@@ -49,7 +51,7 @@ el dispositivo no soporta vibración/audio, el juego sigue igual.
 
 Vos no ves lo que viene atrás: el aviso del HUD y el tono te dicen que algo se
 acerca, pero el lado y la distancia los tenés que confirmar girando la cabeza
-con **A**. Mientras mirás atrás no ves adelante, así que es un riesgo real.
+con **×**. Mientras mirás atrás no ves adelante, así que es un riesgo real.
 
 ## Puntaje
 
@@ -102,6 +104,6 @@ uv run toxinator play patinete-no-mueras --offscreen \
 
 - Solo se importa `toxinator.api` del runtime.
 - No crea `ShowBase` ni ventanas: usa `ctx.scene` y `ctx.ui`.
-- Lee el input desde `ctx.input_state`; **B** es de la plataforma.
+- Lee el input desde `ctx.input_state.primary_frame()`; **○** es de la plataforma.
 - Restaura la cámara y el lente en `stop`.
 - `requires_api = "0.2"`.

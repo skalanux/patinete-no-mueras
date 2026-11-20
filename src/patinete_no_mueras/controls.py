@@ -2,7 +2,7 @@
 
 Sin sensores el juego sigue siendo jugable: arrastrar el dedo dobla y la franja
 inferior del touchpad frena. Con sensores, inclinar el telefono dobla y tirarlo
-hacia atras frena. A mira por encima del hombro izquierdo; A mas un toque en la
+hacia atras frena. × mira por encima del hombro izquierdo; × mas un toque en la
 mitad derecha mira por el hombro derecho.
 """
 
@@ -72,7 +72,7 @@ class ControlReader:
                 brake = True
 
         look = 0
-        if frame.button("A"):
+        if frame.button("cross"):
             side = -1
             for point in frame.touch:
                 if point.x > LOOK_TOUCH_X:

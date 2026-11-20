@@ -32,7 +32,7 @@ class PatineteNoMueras:
         self.reader = ControlReader()
         self.state = "title"
         self.controls = Controls()
-        self.a_down = False
+        self.action_down = False
         self.look = 0.0
         self.look_lock = 0.0
         self.shake = 0.0
@@ -86,16 +86,16 @@ class PatineteNoMueras:
             return
         dt = min(max(dt, 0.0), 0.1)
         self.elapsed += dt
-        frame = self.ctx.input_state.frame(0)
+        frame = self.ctx.input_state.primary_frame()
         controls = self.reader.read(frame)
         self.controls = controls
 
-        pressed_a = frame is not None and frame.button("A")
-        a_edge = pressed_a and not self.a_down
-        self.a_down = pressed_a
+        pressed_action = frame is not None and frame.button("cross")
+        action_edge = pressed_action and not self.action_down
+        self.action_down = pressed_action
 
         if self.state == "title":
-            if a_edge:
+            if action_edge:
                 self._begin_ride()
         elif self.state == "ride":
             events = self.sim.step(dt, controls.steer, controls.brake)
@@ -103,7 +103,7 @@ class PatineteNoMueras:
             if self.sim.game_over:
                 self.state = "gameover"
                 self.hud.show_game_over(int(self.sim.distance), self.sim.points)
-        elif self.state == "gameover" and a_edge:
+        elif self.state == "gameover" and action_edge:
             self._begin_ride()
 
         look_target = float(controls.look) if self.state == "ride" else 0.0

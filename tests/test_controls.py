@@ -59,17 +59,17 @@ def test_bottom_strip_brakes() -> None:
     assert controls.brake
 
 
-def test_a_looks_back_left_by_default() -> None:
+def test_cross_looks_back_left_by_default() -> None:
     reader = ControlReader()
-    controls = reader.read(frame(buttons=frozenset({"A"})))
+    controls = reader.read(frame(buttons=frozenset({"cross"})))
     assert controls.look == -1
 
 
-def test_a_plus_right_touch_looks_back_right() -> None:
+def test_cross_plus_right_touch_looks_back_right() -> None:
     reader = ControlReader()
     controls = reader.read(
         frame(
-            buttons=frozenset({"A"}),
+            buttons=frozenset({"cross"}),
             touch=(TouchPoint(1, 0.8, 0.6),),
         )
     )
