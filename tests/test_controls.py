@@ -13,6 +13,7 @@ def frame(
     buttons: frozenset[str] = frozenset(),
     orientation: tuple[float, float, float] = (0.0, 0.0, 0.0),
     touch: tuple[TouchPoint, ...] = (),
+    axes: dict[str, float] | None = None,
 ) -> ControllerFrame:
     return ControllerFrame(
         controller_id="p1",
@@ -20,6 +21,7 @@ def frame(
         buttons=buttons,
         orientation=orientation,
         touch=touch,
+        axes=axes or {},
     )
 
 
@@ -33,15 +35,15 @@ def test_without_sensors_the_game_uses_touch() -> None:
 
 def test_motion_mode_steers_with_roll() -> None:
     reader = ControlReader()
-    controls = reader.read(frame(orientation=(0.0, 0.0, 15.0)))
+    controls = reader.read(frame(axes={"steer": 0.5}))
     assert controls.motion
-    assert 0.45 < controls.steer < 0.55
+    assert controls.steer == pytest.approx(0.5)
     assert not controls.brake
 
 
 def test_motion_mode_brakes_while_tilting_back() -> None:
     reader = ControlReader()
-    controls = reader.read(frame(orientation=(0.0, 20.0, 0.0)))
+    controls = reader.read(frame(axes={"tilt_y": 0.7}))
     assert controls.brake
 
 

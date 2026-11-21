@@ -12,9 +12,7 @@ from dataclasses import dataclass
 
 from toxinator.api import ControllerFrame
 
-STEER_DEADZONE = 2.5
-STEER_RANGE = 30.0
-BRAKE_BETA = 14.0
+BRAKE_TILT = 0.47
 BRAKE_TOUCH_Y = 0.26
 DRAG_SPAN = 0.20
 LOOK_TOUCH_X = 0.52
@@ -53,16 +51,16 @@ class ControlReader:
             self._brake_touch = False
             return Controls(motion=self.motion)
 
-        _, beta, gamma = frame.orientation
-        if abs(beta) + abs(gamma) > 3.5:
+        steer_posture = frame.axis("steer")
+        tilt_y = frame.axis("tilt_y")
+        if steer_posture != 0.0 or tilt_y != 0.0:
             self.motion = True
 
         steer = 0.0
         brake = False
         if self.motion:
-            if abs(gamma) > STEER_DEADZONE:
-                steer = _clamp(gamma / STEER_RANGE, -1.0, 1.0)
-            brake = beta > BRAKE_BETA
+            steer = steer_posture
+            brake = tilt_y > BRAKE_TILT
         else:
             x = self._track_touch(frame)
             if x is not None:

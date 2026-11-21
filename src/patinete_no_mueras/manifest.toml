@@ -1,7 +1,7 @@
 id = "patinete-no-mueras"
 name = "Patinete No Mueras"
 version = "0.1.0"
-requires_api = "0.3"
+requires_api = "0.4"
 description = "POV en monopatín eléctrico: semáforos, colectivos y motos."
 locales = ["es"]
 default_locale = "es"
@@ -15,10 +15,15 @@ orientation = "auto"
 action = "Mirar atrás"
 back = "Volver"
 hint = "Incliná para doblar · tirá atrás para frenar · ×: mirar atrás"
+gestures = ["steer", "tilt"]
 
 [controller.labels]
 cross = "Mirar atrás"
 circle = "Volver"
+
+[controller.gesture_labels]
+steer = "Doblar"
+tilt = "Frenar"
 
 [art]
 motif = "auto"
